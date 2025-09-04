@@ -1,0 +1,45 @@
+import express from "express";
+import type { Application, Request, Response } from "express";
+import dotenv from "dotenv";
+import cors from "cors";
+import cookieParser from "cookie-parser";
+import http from "http";
+import connectDB from "./config/db.ts";
+import { initSocket } from "./realtime/socket.ts";
+
+// Route imports
+import authRoutes from "./routes/auth.routes.ts";
+import eventRoutes from "./routes/event.routes.ts";
+import bookingRoutes from "./routes/booking.routes.ts";
+
+// Load env variables
+dotenv.config();
+
+const app: Application = express();
+
+// Connect DB
+connectDB();
+
+// Middlewares
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+app.use(cors({ origin: "http://localhost:5173", credentials: true }));
+
+// Routes
+app.use("/api/auth", authRoutes);
+app.use("/api/events", eventRoutes);
+app.use("/api/bookings", bookingRoutes);
+
+// HTTP + Socket.io server
+const httpServer = http.createServer(app);
+
+// Initialize socket
+const { emitBookingUpdate } = initSocket(httpServer);
+global.emitBookingUpdate = emitBookingUpdate;
+
+// Start Server
+const PORT = process.env.PORT ? Number(process.env.PORT) : 3000;
+httpServer.listen(PORT, () => {
+  console.log(`✅ Server running on http://localhost:${PORT}`);
+});
