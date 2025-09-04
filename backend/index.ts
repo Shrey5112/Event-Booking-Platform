@@ -4,13 +4,13 @@ import dotenv from "dotenv";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import http from "http";
-import connectDB from "./config/db.ts";
-import { initSocket } from "./realtime/socket.ts";
+import connectDB from "./config/db";
+import { initSocket } from "./realtime/socket";
 
 // Route imports
-import authRoutes from "./routes/auth.routes.ts";
-import eventRoutes from "./routes/event.routes.ts";
-import bookingRoutes from "./routes/booking.routes.ts";
+import authRoutes from "./routes/auth.routes";
+import eventRoutes from "./routes/event.routes";
+import bookingRoutes from "./routes/booking.routes";
 
 // Load env variables
 dotenv.config();

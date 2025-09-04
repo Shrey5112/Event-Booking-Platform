@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { createBooking, getUserBookings, cancelBooking, confirmBooking, getAllBookings } from "../controllers/booking.controller.ts";
-import { authMiddleware } from "../middleware/auth.middleware.ts"; // ensures user is logged in
-import { isAdmin } from "../middleware/admin.middleware.ts";
+import { createBooking, getUserBookings, cancelBooking, confirmBooking, getAllBookings } from "../controllers/booking.controller";
+import { authMiddleware } from "../middleware/auth.middleware"; // ensures user is logged in
+import { isAdmin } from "../middleware/admin.middleware";
 
 const router = Router();
 

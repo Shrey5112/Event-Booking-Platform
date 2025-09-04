@@ -1,93 +1,10 @@
-// import type { Request, Response } from "express";
-// import Event from "../models/event.model.ts";
-// import type { IEvent } from "../models/event.model.ts";
 
-// // ✅ Create Event
-// export const createEvent = async (req: Request, res: Response): Promise<void> => {
-//   try {
-//     const { title, description, date, location, price, availableTickets } = req.body;
-//     const userId = (req as any).user.id; // comes from auth middleware
-
-//     const event: IEvent = await Event.create({
-//       title,
-//       description,
-//       date,
-//       location,
-//       price,
-//       availableTickets, // ✅ added here
-//       createdBy: userId,
-//     });
-
-//     res.status(201).json({ message: "Event created", event });
-//   } catch (error: any) {
-//     res.status(500).json({ message: error.message });
-//   }
-// };
-
-// // ✅ Get All Events
-// export const getEvents = async (_req: Request, res: Response): Promise<void> => {
-//   try {
-//     const events = await Event.find().populate("createdBy", "name email");
-//     res.status(200).json(events);
-//   } catch (error: any) {
-//     res.status(500).json({ message: error.message });
-//   }
-// };
-
-// // ✅ Get Single Event
-// export const getEventById = async (req: Request, res: Response): Promise<void> => {
-//   try {
-//     const event = await Event.findById(req.params.id).populate("createdBy", "name email");
-//     if (!event) {
-//       res.status(404).json({ message: "Event not found" });
-//       return;
-//     }
-//     res.status(200).json(event);
-//   } catch (error: any) {
-//     res.status(500).json({ message: error.message });
-//   }
-// };
-
-// // ✅ Update Event
-// export const updateEvent = async (req: Request, res: Response): Promise<void> => {
-//   try {
-//     const { title, description, date, location, price, availableTickets } = req.body;
-
-//     const event = await Event.findByIdAndUpdate(
-//       req.params.id,
-//       { title, description, date, location, price, availableTickets }, // ✅ include tickets
-//       { new: true }
-//     );
-
-//     if (!event) {
-//       res.status(404).json({ message: "Event not found" });
-//       return;
-//     }
-//     res.status(200).json({ message: "Event updated", event });
-//   } catch (error: any) {
-//     res.status(500).json({ message: error.message });
-//   }
-// };
-
-// // ✅ Delete Event
-// export const deleteEvent = async (req: Request, res: Response): Promise<void> => {
-//   try {
-//     const event = await Event.findByIdAndDelete(req.params.id);
-//     if (!event) {
-//       res.status(404).json({ message: "Event not found" });
-//       return;
-//     }
-//     res.status(200).json({ message: "Event deleted" });
-//   } catch (error: any) {
-//     res.status(500).json({ message: error.message });
-//   }
-// };
 
 import type { Request as ExpressRequest, Response } from "express";
-import Event from "../models/event.model.ts";
+import Event from "../models/event.model";
 import type { IEvent } from "../models/event.model.ts";
-import cloudinary from "../utils/cloudinary.ts"; // ✅ your cloudinary config file
-import getDataUri from "../utils/dataUri.ts"; // ✅ helper for file buffer → base64
+import cloudinary from "../utils/cloudinary"; // ✅ your cloudinary config file
+import getDataUri from "../utils/dataUri"; // ✅ helper for file buffer → base64
 
 // Extend Request type to include 'file' property
 interface MulterRequest extends ExpressRequest {
