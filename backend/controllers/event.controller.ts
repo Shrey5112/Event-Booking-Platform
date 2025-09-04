@@ -1,10 +1,10 @@
 
 
 import type { Request as ExpressRequest, Response } from "express";
-import Event from "../models/event.model";
+import Event from "../models/event.model.ts";
 import type { IEvent } from "../models/event.model.ts";
-import cloudinary from "../utils/cloudinary"; // ✅ your cloudinary config file
-import getDataUri from "../utils/dataUri"; // ✅ helper for file buffer → base64
+import cloudinary from "../utils/cloudinary.ts"; // ✅ your cloudinary config file
+import getDataUri from "../utils/dataUri.ts"; // ✅ helper for file buffer → base64
 
 // Extend Request type to include 'file' property
 interface MulterRequest extends ExpressRequest {

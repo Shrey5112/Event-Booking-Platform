@@ -1,7 +1,7 @@
 import type { Request, Response } from "express";
-import Booking from "../models/booking.model";
+import Booking from "../models/booking.model.ts";
 import type { IBooking } from "../models/booking.model.ts";
-import Event from "../models/event.model";
+import Event from "../models/event.model.ts";
 
 // ✅ Create Booking
 export const createBooking = async (

@@ -5,10 +5,10 @@ import {
   getEventById,
   updateEvent,
   deleteEvent,
-} from "../controllers/event.controller";
-import { authMiddleware } from "../middleware/auth.middleware"; // protects routes
-import { isAdmin } from "../middleware/admin.middleware";
-import { singleUpload } from "../middleware/multer";
+} from "../controllers/event.controller.ts";
+import { authMiddleware } from "../middleware/auth.middleware.ts"; // protects routes
+import { isAdmin } from "../middleware/admin.middleware.ts";
+import { singleUpload } from "../middleware/multer.ts";
 
 const router = Router();
 

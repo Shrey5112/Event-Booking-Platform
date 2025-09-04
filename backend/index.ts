@@ -4,13 +4,13 @@ import dotenv from "dotenv";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import http from "http";
-import connectDB from "./config/db";
-import { initSocket } from "./realtime/socket";
+import connectDB from "./config/db.ts";
+import { initSocket } from "./realtime/socket.ts";
 
 // Route imports
-import authRoutes from "./routes/auth.routes";
-import eventRoutes from "./routes/event.routes";
-import bookingRoutes from "./routes/booking.routes";
+import authRoutes from "./routes/auth.routes.ts";
+import eventRoutes from "./routes/event.routes.ts";
+import bookingRoutes from "./routes/booking.routes.ts";
 
 // Load env variables
 dotenv.config();
@@ -36,6 +36,18 @@ const httpServer = http.createServer(app);
 
 // Initialize socket
 const { emitBookingUpdate } = initSocket(httpServer);
+
+declare global {
+  // define your property here
+  var emitBookingUpdate: (payload: {
+    userId: string;
+    bookingId: string;
+    status: "pending" | "confirmed" | "cancelled";
+    eventId: string;
+    action: "created" | "updated";
+  }) => void;
+}
+
 global.emitBookingUpdate = emitBookingUpdate;
 
 // Start Server
