@@ -88,7 +88,7 @@ const Login = () => {
               <div>
                 <Label className="py-2">Email</Label>
                 <Input
-                  type="email"
+                  // type="email"
                   placeholder="Email Address"
                   {...register("email", {
                     required: "Email is required",
