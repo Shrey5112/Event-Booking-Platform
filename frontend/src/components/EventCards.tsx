@@ -44,7 +44,7 @@ const EventCard = ({ event }: { event: any }) => {
   const handleDelete = async () => {
     try {
       const res = await axios.delete(
-        `http://localhost:3000/api/events/${event._id}`,
+        `${import.meta.env.VITE_BASE_URL}/events/${event._id}`,
         { withCredentials: true }
       );
       dispatch(removeEvent(event._id));
@@ -68,7 +68,7 @@ const EventCard = ({ event }: { event: any }) => {
       if (thumbnail) formData.append("file", thumbnail);
 
       const res = await axios.put(
-        `http://localhost:3000/api/events/${event._id}`,
+        `${import.meta.env.VITE_BASE_URL}/events/${event._id}`,
         formData,
         {
           withCredentials: true,

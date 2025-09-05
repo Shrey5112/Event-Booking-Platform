@@ -37,7 +37,7 @@ const Home = () => {
   useEffect(() => {
     (async () => {
       try {
-        const res = await axios.get("http://localhost:3000/api/events", {
+        const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/events`, {
           withCredentials: true,
         });
         dispatch(setEvents(res.data));
@@ -61,7 +61,7 @@ setLoading(true);
       formData.append("availableTickets", newEvent.availableTickets);
       if (thumbnail) formData.append("file", thumbnail); // ✅ Add thumbnail
 
-      const res = await axios.post("http://localhost:3000/api/events", formData, {
+      const res = await axios.post(`${import.meta.env.VITE_BASE_URL}/events`, formData, {
         withCredentials: true,
         headers: { "Content-Type": "multipart/form-data" },
       });

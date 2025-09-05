@@ -41,7 +41,7 @@ const Register = () => {
   const onSubmit: SubmitHandler<RegisterFormValues> = async (data) => {
     try {
       const response = await axios.post<RegisterResponse>(
-        "http://localhost:3000/api/auth/register",
+        `${import.meta.env.VITE_BASE_URL}/auth/register`,
         data,
         { withCredentials: true }
       );

@@ -42,7 +42,7 @@ const Login = () => {
   const onSubmit: SubmitHandler<LoginFormValues> = async (data) => {
     try {
       const response = await axios.post<LoginResponse>(
-        `http://localhost:3000/api/auth/login`,
+        `${import.meta.env.VITE_BASE_URL}/auth/login`,
         data,
         {
           withCredentials: true,

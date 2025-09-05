@@ -7,8 +7,9 @@
     "skipLibCheck": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
-    "allowImportingTsExtensions": true,   // ✅ allow .ts in imports
-    "noEmit": true                        // ✅ required when using allowImportingTsExtensions
+    "allowImportingTsExtensions": true, // ✅ allow .ts in imports
+    "outDir": "dist",
+    "noEmit": true
   },
   "include": ["./**/*.ts"],
   "exclude": ["node_modules", "dist"]

@@ -15,7 +15,7 @@ const UserBookingsPage = () => {
 
   const fetchBookings = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/api/bookings/user", {
+      const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/bookings/user`, {
         withCredentials: true,
       });
 
@@ -81,7 +81,7 @@ const UserBookingsPage = () => {
   const cancelBooking = async (bookingId: string) => {
   try {
     await axios.put(
-      `http://localhost:3000/api/bookings/${bookingId}/cancel`,
+      `${import.meta.env.VITE_BASE_URL}/bookings/${bookingId}/cancel`,
       {},
       { withCredentials: true }
     );

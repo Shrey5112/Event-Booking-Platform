@@ -15,7 +15,7 @@ const AdminBookingsPage = () => {
 
   const fetchBookings = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/api/bookings/all", {
+      const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/bookings/all`, {
         withCredentials: true,
       });
 
@@ -72,7 +72,7 @@ const AdminBookingsPage = () => {
   const confirmBooking = async (id: string) => {
     try {
       const res = await axios.put(
-        `http://localhost:3000/api/bookings/${id}/confirm`,
+        `${import.meta.env.VITE_BASE_URL}/bookings/${id}/confirm`,
         {},
         { withCredentials: true }
       );
@@ -85,7 +85,7 @@ const AdminBookingsPage = () => {
   const cancelBooking = async (id: string) => {
     try {
       const res = await axios.put(
-        `http://localhost:3000/api/bookings/${id}/cancel`,
+        `${import.meta.env.VITE_BASE_URL}/bookings/${id}/cancel`,
         {},
         { withCredentials: true }
       );
