@@ -1,0 +1,45 @@
+Frontend(react + redux):
+
+Created login, sign-up page
+
+Create, Edit, delete Events(Admin only):
+Event contain title, description, date, location, price, available tickets
+
+i use shadcn components for ui
+
+Created Logout func in navbar components
+
+i use redux for state management (dispatch and selector):
+i use themeSlice for toggling the theme(dark-light)
+authSlice → Handles login/logout & authentication state
+
+Used lucide-react and react-icons for icons
+
+Confirm and Cancel booking (with real-time updates using WebSocket)
+
+Form validation
+
+Toast notifications (success/error)
+
+Loading states with spinners
+
+
+
+Backend(Express + Mongoose):
+
+Using mongodb database for storing data 
+
+For user authentication, using jwtwebtoken for login, sign-up and bycryptjs for hashing password
+
+Created middleware to protect routes(user & admin)
+
+Used web-socket for realtime bookings update
+
+Created users, events and bookings models and controllers
+
+CRUD operations for events(Admin only)
+
+Using multer lib for uploading files/image. Also using datauri and cloudinary libs for embedding and managing files 
+
+Used postman for checking endpoint
+
