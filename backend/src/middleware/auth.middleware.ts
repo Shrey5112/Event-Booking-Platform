@@ -8,11 +8,9 @@ interface AuthRequest extends Request {
 
 export const authMiddleware = (req: AuthRequest, res: Response, next: NextFunction) => {
   try {
-    // Read token from cookies
-    // console.log("res", req.cookies);
-    const token = req.cookies?.token; // assuming you store token in cookie named "token"
-    // console.log("dsfadsf", token)
 
+    const token = req.cookies?.token;
+    console.log("Cookies received:", req.cookies);
     if (!token) {
       return res.status(401).json({ message: "Access denied. No token provided." });
     }
