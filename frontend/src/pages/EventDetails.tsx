@@ -53,7 +53,7 @@ const EventDetails = () => {
   const handleBooking = async () => {
     try {
       const res = await axios.post(
-        `http://localhost:3000/api/bookings/${event._id}`,
+        `${import.meta.env.VITE_BASE_URL}/bookings/${event._id}`,
         { tickets }, // send tickets count
         { withCredentials: true }
       );
@@ -78,9 +78,6 @@ const EventDetails = () => {
         })
       );
 
-      // console.log(">>", booking);
-      // console.log(">>", event);
-
       toast.success(
         `Booking Created for ${event.title}. Status: ${booking.status}`
       );
@@ -89,7 +86,6 @@ const EventDetails = () => {
       console.error("Booking failed", error);
 
       if (error.response?.status === 401) {
-        // 🔑 Not logged in → redirect
         toast.error("Please log in to continue");
         navigate("/login");
       } else {
@@ -99,79 +95,6 @@ const EventDetails = () => {
       }
     }
   };
-
-  // 🔥 Handle Stripe Checkout
-  // const handleCheckout = async () => {
-  //   try {
-  //     const res = await axios.post(
-  //       `${import.meta.env.VITE_BASE_URL}/bookings/checkout`,
-  //       {
-  //         eventId: event._id,
-  //         tickets,
-  //         totalPrice, // send price to backend
-  //       },
-  //       { withCredentials: true }
-  //     );
-
-  //     if (res.data?.url) {
-  //       // redirect to Stripe checkout
-  //       window.location.href = res.data.url;
-  //     } else {
-  //       toast.error("Failed to start checkout session");
-  //     }
-  //   } catch (error: any) {
-  //     console.error("Checkout failed", error);
-
-  //     if (error.response?.status === 401) {
-  //       toast.error("Please log in to continue");
-  //       navigate("/login");
-  //     } else {
-  //       toast.error(error.response?.data?.message || "Checkout failed");
-  //     }
-  //   }
-  // };
-
-  // Load Stripe instance outside the component (so it’s not reloaded on every render)
-// const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
-
-// const handleCheckout = async () => {
-//   try {
-//     const res = await axios.post(
-//       `${import.meta.env.VITE_BASE_URL}/bookings/checkout`,
-//       {
-//         eventId: event._id,
-//         tickets,
-//         totalPrice, // send price to backend
-//       },
-//       { withCredentials: true }
-//     );
-
-//     const stripe = await stripePromise;
-
-//     if (res.data?.id) {
-//       // Redirect to Stripe Checkout using session ID
-//       const { error } = await stripe!.redirectToCheckout({
-//         sessionId: res.data.id,
-//       });
-
-//       if (error) {
-//         toast.error(error.message || "Failed to redirect to checkout");
-//       }
-//     } else {
-//       toast.error("Failed to start checkout session");
-//     }
-//   } catch (error: any) {
-//     console.error("Checkout failed", error);
-
-//     if (error.response?.status === 401) {
-//       toast.error("Please log in to continue");
-//       navigate("/login");
-//     } else {
-//       toast.error(error.response?.data?.message || "Checkout failed");
-//     }
-//   }
-// };
-
 
   return (
     <div className="p-6 pt-16 min-h-screen flex justify-center items-center">

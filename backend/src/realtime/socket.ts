@@ -64,11 +64,7 @@ export const initSocket = (httpServer: HttpServer) => {
     eventId: string;
     action: "created" | "updated";
   }) => {
-    // console.log("------------", payload);
-
-    // to specific user
     nsp.to(`user:${payload.userId}`).emit("booking:update", payload);
-    // optionally notify admins dashboard
     nsp.to("admins").emit("booking:adminFeed", payload);
   };
 
@@ -84,65 +80,3 @@ function extractTokenFromCookie(cookieHeader: string) {
     .find((c) => c.startsWith("token="));
   return m ? m.replace("token=", "") : null;
 }
-
-// import { Server } from "socket.io";
-// import type { Server as HttpServer } from "http";
-
-// export interface SocketUser {
-//   id: string;
-//   role: "user" | "admin";
-// }
-
-// export const initSocket = (httpServer: HttpServer) => {
-//   const io = new Server(httpServer, {
-//     cors: {
-//       origin: process.env.CLIENT_ORIGIN || "http://localhost:5173",
-//       credentials: true,
-//     },
-//   });
-
-//   // Namespace for bookings
-//   const nsp = io.of("/bookings");
-
-//   // ✅ Only minimal auth check (assuming authMiddleware already ran)
-//   nsp.use((socket, next) => {
-//     console.log("socketsfdfds");
-//     console.log("socket", socket);
-//     const user = socket.handshake.auth?.user as SocketUser; // client sends req.user
-//     console.log("user", user);
-//     if (!user) return next(new Error("Unauthorized"));
-
-//     (socket as any).user = user;
-
-//     // Join rooms
-//     socket.join(`user:${user.id}`);
-//     if (user.role === "admin") socket.join("admins");
-
-//     next();
-//   });
-
-//   nsp.on("connection", (socket) => {
-//     const user = (socket as any).user as SocketUser;
-
-//     // Confirm connection
-//     socket.emit("connected", { ok: true, userId: user.id });
-
-//     socket.on("disconnect", () => {
-//       console.log(`❌ User ${user.id} disconnected`);
-//     });
-//   });
-
-//   // ✅ Helper to emit booking updates
-//   const emitBookingUpdate = (payload: {
-//     userId: string;
-//     bookingId: string;
-//     status: "pending" | "confirmed" | "cancelled";
-//     eventId: string;
-//     action: "created" | "updated";
-//   }) => {
-//     nsp.to(`user:${payload.userId}`).emit("booking:update", payload);
-//     nsp.to("admins").emit("booking:adminFeed", payload);
-//   };
-
-//   return { io, nsp, emitBookingUpdate };
-// };
